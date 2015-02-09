@@ -13,7 +13,7 @@
 
 @interface ViewController ()
 @property (weak, nonatomic) IBOutlet UILabel *filpCountLabel;
-@property (strong) Deck* deck;
+@property (nonatomic, strong) Deck* deck;
 @property (nonatomic) int filpCount;
 
 @end
@@ -57,17 +57,20 @@
         
         UIImage* cardImage = [UIImage imageNamed:@"cardFront"];
         
+        
         Card *card = [self.deck drawWithRandomCard];
         
+        if (card) {
+            [sender setBackgroundImage:cardImage forState:UIControlStateNormal];
+            
+            [sender setTitle:card.contents forState:UIControlStateNormal];
+            self.filpCount++;
+        }
         
         
-        [sender setBackgroundImage:cardImage forState:UIControlStateNormal];
-        
-        [sender setTitle:card.contents forState:UIControlStateNormal];
         
     }
     
-    self.filpCount++;
     
     
 }
